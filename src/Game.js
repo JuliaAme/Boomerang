@@ -2,10 +2,11 @@
 // Или можно не импортировать,
 // а передавать все нужные объекты прямо из run.js при инициализации new Game().
 
-const Hero = require("./game-models/Hero");
-const Enemy = require("./game-models/Enemy");
-const Boomerang = require("./game-models/Boomerang");
-const View = require("./View");
+const Hero = require('./game-models/Hero');
+const Enemy = require('./game-models/Enemy');
+const Boomerang = require('./game-models/Boomerang');
+const View = require('./View');
+const play = require('play-sound')({ player: 'afplay' }); // Use 'afplay' for macOS, 'aplay' for Linux, 'cmdmp3' for Windows
 
 // Основной класс игры.
 // Тут будут все настройки, проверки, запуск.
@@ -24,7 +25,7 @@ class Game {
   regenerateTrack() {
     // Сборка всего необходимого (герой, враг(и), оружие)
     // в единую структуру данных
-    this.track = new Array(this.trackLength).fill(" ");
+    this.track = new Array(this.trackLength).fill(' ');
     this.track[this.hero.position] = this.hero.skin;
     this.track[this.enemy.position] = this.enemy.skin;
     this.track[this.boomerang.position] = this.boomerang.skin;
@@ -40,10 +41,11 @@ class Game {
   }
 
   play() {
+
     setInterval(() => {
       // Let's play!
-
-      if (this.enemy.skin === "💀") {
+    
+      if (this.enemy.skin === '💀') {
         this.check();
         this.boomerang.moveLeft();
         this.regenerateTrack();
@@ -55,10 +57,10 @@ class Game {
         this.view.render(this.track);
       }
       if (this.boomerang.position === 0) {
-        console.log("YOU WIN!");
-        process.exit()
+        console.log('YOU WIN!');
+        process.exit();
       }
-    }, 100);
+    }, 60);
   }
 }
 
