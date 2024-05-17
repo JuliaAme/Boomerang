@@ -1,4 +1,5 @@
 // Наш герой.
+const play = require('play-sound')({ player: 'afplay' }); // Use 'afplay' for macOS, 'aplay' for Linux, 'cmdmp3' for Windows
 
 class Hero {
   constructor({ position }) {
